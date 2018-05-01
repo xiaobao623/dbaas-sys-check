@@ -41,4 +41,4 @@ if [ $? -eq 0 ];then
 exit
 fi
 
-echo "This is NOT SUSE-12 nor UPEL-1 nor CentOS-7 Linux, exit!"
+echo "WARN: This is none SUSE-12, UPEL-1 and CentOS-7 Linux, exit!"
