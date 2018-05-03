@@ -1,7 +1,7 @@
 #!/bin/bash
 # OS check report csv script
 # Author Zhang Yongqi
-# Version 1.0 2018-04-27
+# Version 1.0 2018-05-04
 # Support UPEL 1.0, SLES 11.x, SLES 12.x
 
 test -f /etc/SuSE-release 
