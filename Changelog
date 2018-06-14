@@ -1,0 +1,9 @@
+* 2018-05-03 York xiaobao623@gmail.com [v0.1] 
+- Changes: 
+  Init version
+
+* 2018-06-13 York [v0.2]
+- Changes:
+  - add vars lines=2000
+  - add work pwd =/tmp/dbaas-sys-check
+
