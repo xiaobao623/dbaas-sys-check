@@ -1,8 +1,10 @@
 #!/bin/bash
 # OS check report csv script
 # Author Zhang Yongqi
-# Version 1.0 2018-05-04
+# Version 1.0 2018-04-27
 # Support UPEL 1.0, SLES 11.x, SLES 12.x
+
+PWD="/tmp/dbaas-sys-check"
 
 test -f /etc/SuSE-release 
 if [ $? -eq 0 ];then 
@@ -11,10 +13,10 @@ if [ $? -eq 0 ];then
 
   if [ $SUSEVERSION == 12 ];then
     echo -e "Beginning SUSE 12 System Check...\n"
-    /bin/sh sles12-system-check-report-csv.sh
+    /bin/sh ${PWD}/sles12-system-check-report-csv.sh
   elif [ $SUSEVERSION == 11 ];then
     echo -e "Beginning SUSE 11 System Check...\n"
-    /bin/sh sles11-system-check-report-csv.sh
+    /bin/sh ${PWD}/sles11-system-check-report-csv.sh
   fi
 exit
 fi
@@ -25,7 +27,7 @@ if [ $? -eq 0 ];then
 
   if [ ${UPELVERSION} == 1 ];then
     echo -e "Beginning UPEL 1  System Check...\n"
-    /bin/sh upel-system-check-report-csv.sh
+    /bin/sh ${PWD}/upel-system-check-report-csv.sh
   fi
 exit
 fi
@@ -36,7 +38,7 @@ if [ $? -eq 0 ];then
 
   if [ ${CENTOSVERSION} == 7 ];then
     echo -e "Beginning CentOS 7 System Check...\n"
-    /bin/sh upel-system-check-report-csv.sh
+    /bin/sh ${PWD}/upel-system-check-report-csv.sh
   fi
 exit
 fi
