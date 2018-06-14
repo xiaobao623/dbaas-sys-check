@@ -9,6 +9,7 @@ DATE=`date +%Y%m%d`
 REPORT_TYPE="system"
 REPORT_DIR="/tmp/check-reports"
 HOSTNAME=`hostname`
+LINES="2000"
 
 test -f /etc/SuSE-release 
 if [ $? -eq 1 ];then
@@ -56,17 +57,17 @@ printf "%-30s %-40s\n" "Process counts;" "`ps -ef|wc -l`" >>$CHECK_RESULT
 printf "%-30s %-40s\n" "Journal disk-usage;" "`journalctl --disk-usage | awk '{print $7}'`" >>$CHECK_RESULT
 printf "%-30s %-40s\n" "Dmesg error counts;" "`journalctl -k | egrep -i "error" | wc -l`" >>$CHECK_RESULT
 printf "%-30s %-40s\n" "Dmesg fail counts;" "`journalctl -k | egrep -i "fail|failed" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog error counts;" "`journalctl -n500 | egrep -i "error" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog fail counts;" "`journalctl -n500 | egrep -i "fail|failed" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog segfault counts;" "`journalctl -n500 | egrep -i "segfault at" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog oops counts;" "`journalctl -n500 | egrep -i "oops:" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog kernel panic counts;" "`journalctl -n500 | egrep -i "kernel panic" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog hardware error counts;" "`journalctl -n500 | egrep -i "hardware error" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog bug soft lockup counts;" "`journalctl -n500 | egrep -i "bug: soft lockup" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog bug unable handle counts;" "`journalctl -n500 | egrep -i "bug: unable to handle kernel paging" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog call trace counts;" "`journalctl -n500 | egrep -i "call trace" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog out of memory counts;" "`journalctl -n500 | egrep -i "out of memory" | wc -l`" >>$CHECK_RESULT
-printf "%-30s %-40s\n" "Syslog oom killer counts;" "`journalctl -n500 | egrep -i "oom_killer" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog error counts;" "`journalctl -n${LINES} | egrep -i "error" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog fail counts;" "`journalctl -n${LINES} | egrep -i "fail|failed" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog segfault counts;" "`journalctl -n${LINES} | egrep -i "segfault at" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog oops counts;" "`journalctl -n${LINES} | egrep -i "oops:" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog kernel panic counts;" "`journalctl -n${LINES} | egrep -i "kernel panic" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog hardware error counts;" "`journalctl -n${LINES} | egrep -i "hardware error" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog bug soft lockup counts;" "`journalctl -n${LINES} | egrep -i "bug: soft lockup" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog bug unable handle counts;" "`journalctl -n${LINES} | egrep -i "bug: unable to handle kernel paging" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog call trace counts;" "`journalctl -n${LINES} | egrep -i "call trace" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog out of memory counts;" "`journalctl -n${LINES} | egrep -i "out of memory" | wc -l`" >>$CHECK_RESULT
+printf "%-30s %-40s\n" "Syslog oom killer counts;" "`journalctl -n${LINES} | egrep -i "oom_killer" | wc -l`" >>$CHECK_RESULT
 printf "%-30s %-40s\n" "Filesystem Used than 80%;" "`df -Th | egrep -v "tmpfs|iso" | sed -n '2,$'p | awk 'NF==1{t=$1;getline;$1=t " " $1}1' | gawk '{if ($6>=80) print}' | tr "\n" " "`" >>$CHECK_RESULT
 
 
@@ -78,31 +79,31 @@ journalctl -k | egrep -i "fail|failed" >>$CHECK_RESULT
 echo -e "\n==== Check warn in Dmesg ====\n" >>$CHECK_RESULT
 journalctl -k | egrep -i "warn" >>$CHECK_RESULT
 
-# Check Journal latest 500 lines error and fault
-echo -e "\n==== Check error in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "error" >>$CHECK_RESULT
-echo -e "\n==== Check fail in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "fail|failed" >>$CHECK_RESULT
-echo -e "\n==== Check segfault in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "segfault at" >>$CHECK_RESULT
-echo -e "\n==== Check oops in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "oops:" >>$CHECK_RESULT
-echo -e "\n==== Check kernel panic in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "kernel panic" >>$CHECK_RESULT
-echo -e "\n==== Check hardware error in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "hardware error" >>$CHECK_RESULT
-echo -e "\n==== Check bug: soft lockup in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "bug: soft lockup" >>$CHECK_RESULT
-echo -e "\n==== Check bug: unable to handle kernel paging in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "bug: unable to handle kernel paging" >>$CHECK_RESULT
-echo -e "\n==== Check call trace in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "call trace" >>$CHECK_RESULT
-echo -e "\n==== Check out of memory in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "out of memory" >>$CHECK_RESULT
-echo -e "\n==== Check oom_killer in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "oom_killer" >>$CHECK_RESULT
-echo -e "\n==== Check warn in latest 500 lines message ====\n" >>$CHECK_RESULT
-journalctl -n500 | egrep -i "warn" >>$CHECK_RESULT
+# Check Journal latest ${LINES} lines error and fault
+echo -e "\n==== Check error in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "error" >>$CHECK_RESULT
+echo -e "\n==== Check fail in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "fail|failed" >>$CHECK_RESULT
+echo -e "\n==== Check segfault in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "segfault at" >>$CHECK_RESULT
+echo -e "\n==== Check oops in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "oops:" >>$CHECK_RESULT
+echo -e "\n==== Check kernel panic in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "kernel panic" >>$CHECK_RESULT
+echo -e "\n==== Check hardware error in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "hardware error" >>$CHECK_RESULT
+echo -e "\n==== Check bug: soft lockup in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "bug: soft lockup" >>$CHECK_RESULT
+echo -e "\n==== Check bug: unable to handle kernel paging in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "bug: unable to handle kernel paging" >>$CHECK_RESULT
+echo -e "\n==== Check call trace in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "call trace" >>$CHECK_RESULT
+echo -e "\n==== Check out of memory in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "out of memory" >>$CHECK_RESULT
+echo -e "\n==== Check oom_killer in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "oom_killer" >>$CHECK_RESULT
+echo -e "\n==== Check warn in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+journalctl -n${LINES} | egrep -i "warn" >>$CHECK_RESULT
 
 echo -e "\n==========================================================\n" >>$CHECK_RESULT
 echo -e "[System Health Check Detail]" >>$CHECK_RESULT
@@ -231,9 +232,9 @@ rpm -qa | sort >>$CHECK_RESULT
 echo -e "\n==== Dmesg ====\n" >>$CHECK_RESULT
 dmesg >>$CHECK_RESULT
 
-# Check Journal latest 500 lines
-echo -e "\n==== Check latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages >>$CHECK_RESULT
+# Check Journal latest ${LINES} lines
+echo -e "\n==== Check latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages >>$CHECK_RESULT
 
 # Check finished
 echo -e "\n==== OS Check finished ====\n" >>$CHECK_RESULT

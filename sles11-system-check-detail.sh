@@ -9,6 +9,7 @@ DATE=`date +%Y%m%d`
 REPORT_TYPE="system"
 REPORT_DIR="/tmp/check-reports"
 HOSTNAME=`hostname`
+LINES="2000"
 
 test -f /etc/SuSE-release 
 if [ $? -eq 1 ];then
@@ -75,31 +76,31 @@ dmesg | egrep -i "fail|failed" >>$CHECK_RESULT
 echo -e "\n==== Check warn in Dmesg ====\n" >>$CHECK_RESULT
 dmesg | egrep -i "warn" >>$CHECK_RESULT
 
-# Check Journal latest 500 lines error and fault
-echo -e "\n==== Check error in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "error" >>$CHECK_RESULT
-echo -e "\n==== Check fail in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "fail|failed" >>$CHECK_RESULT
-echo -e "\n==== Check segfault in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "segfault at" >>$CHECK_RESULT
-echo -e "\n==== Check oops in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "oops:" >>$CHECK_RESULT
-echo -e "\n==== Check kernel panic in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "kernel panic" >>$CHECK_RESULT
-echo -e "\n==== Check hardware error in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "hardware error" >>$CHECK_RESULT
-echo -e "\n==== Check bug: soft lockup in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "bug: soft lockup" >>$CHECK_RESULT
-echo -e "\n==== Check bug: unable to handle kernel paging in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "bug: unable to handle kernel paging" >>$CHECK_RESULT
-echo -e "\n==== Check call trace in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "call trace" >>$CHECK_RESULT
-echo -e "\n==== Check out of memory in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "out of memory" >>$CHECK_RESULT
-echo -e "\n==== Check oom_killer in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "oom_killer" >>$CHECK_RESULT
-echo -e "\n==== Check warn in latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages | egrep -i "warn" >>$CHECK_RESULT
+# Check Journal latest ${LINES} lines error and fault
+echo -e "\n==== Check error in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "error" >>$CHECK_RESULT
+echo -e "\n==== Check fail in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "fail|failed" >>$CHECK_RESULT
+echo -e "\n==== Check segfault in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "segfault at" >>$CHECK_RESULT
+echo -e "\n==== Check oops in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "oops:" >>$CHECK_RESULT
+echo -e "\n==== Check kernel panic in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "kernel panic" >>$CHECK_RESULT
+echo -e "\n==== Check hardware error in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "hardware error" >>$CHECK_RESULT
+echo -e "\n==== Check bug: soft lockup in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "bug: soft lockup" >>$CHECK_RESULT
+echo -e "\n==== Check bug: unable to handle kernel paging in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "bug: unable to handle kernel paging" >>$CHECK_RESULT
+echo -e "\n==== Check call trace in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "call trace" >>$CHECK_RESULT
+echo -e "\n==== Check out of memory in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "out of memory" >>$CHECK_RESULT
+echo -e "\n==== Check oom_killer in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "oom_killer" >>$CHECK_RESULT
+echo -e "\n==== Check warn in latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages | egrep -i "warn" >>$CHECK_RESULT
 
 echo -e "\n==========================================================\n" >>$CHECK_RESULT
 echo -e "[System Health Check Detail]" >>$CHECK_RESULT
@@ -221,9 +222,9 @@ rpm -qa | sort >>$CHECK_RESULT
 echo -e "\n==== Dmesg ====\n" >>$CHECK_RESULT
 dmesg >>$CHECK_RESULT
 
-# Check Journal latest 500 lines
-echo -e "\n==== Check latest 500 lines message ====\n" >>$CHECK_RESULT
-tail -n500 /var/log/messages >>$CHECK_RESULT
+# Check Journal latest ${LINES} lines
+echo -e "\n==== Check latest ${LINES} lines message ====\n" >>$CHECK_RESULT
+tail -n${LINES} /var/log/messages >>$CHECK_RESULT
 
 # Check finished
 echo -e "\n==== OS Check finished ====\n" >>$CHECK_RESULT
