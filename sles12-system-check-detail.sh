@@ -32,7 +32,7 @@ SUSEVERSION="`grep VERSION /etc/SuSE-release | awk '{print $3}'`"
 SUSEPATCHLEVEL="`grep PATCHLEVEL /etc/SuSE-release | awk '{print $3}'`"
 
 if [ $SUSEVERSION == 12 ];then
-echo -e "Beginning Systemc Check..."
+echo -e "Beginning System Check..."
 
 printf "%-30s %-40s\n" "Item;" "Results" >>$CHECK_RESULT
 printf "%-30s %-40s\n" "Hostname;" "`hostname`" >>$CHECK_RESULT
