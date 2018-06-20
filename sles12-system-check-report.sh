@@ -2,7 +2,7 @@
 # OS check report csv script
 # Author Zhang Yongqi
 # Version 1.0 2018-04-26
-# Support SLES 11.x and SLES 12.x
+# Support SLES 12.x
 
 test -f /etc/SuSE-release 
 if [ $? -eq 1 ];then

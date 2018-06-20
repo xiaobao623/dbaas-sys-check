@@ -2,7 +2,7 @@
 # OS check and report script
 # Author Zhang Yongqi
 # Version 1.0 2018-04-26
-# Support SLES 11.x and SLES 12.x
+# Support SLES 11.x
 
 alias egrep='egrep --color=auto'
 DATE=`date +%Y%m%d`

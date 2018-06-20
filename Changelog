@@ -7,3 +7,7 @@
   - add vars lines=2000
   - add work pwd =/tmp/dbaas-sys-check
 
+*2018-06-20 HAO
+-Changes:
+  - add dbaas-linux-syscheck-detail.sh
+  - modify some notes

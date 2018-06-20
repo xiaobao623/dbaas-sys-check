@@ -2,7 +2,7 @@
 # OS check report csv script
 # Author Zhang Yongqi
 # Version 1.0 2018-02-25
-# Support UPEL 1.x CentOS 7.x RHEL 7.x
+# Support SLES 11.x
 
 test -f /etc/SuSE-release 
 if [ $? -eq 1 ];then
