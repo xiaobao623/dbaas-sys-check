@@ -84,7 +84,7 @@ cat /etc/SuSE-release >>$CHECK_RESULT
 echo -e "\n==== IP addresses ====\n" >>$CHECK_RESULT
 #ip a >>$CHECK_RESULT
 
-# Check OS uptime 
+# Check OS uptime
 echo -e "\n==== Uptime ====\n" >>$CHECK_RESULT
 uptime >>$CHECK_RESULT
 
@@ -140,14 +140,14 @@ rpm -qa | wc -l >>$CHECK_RESULT
 echo -e "\n==== RPM counts ====\n" >>$CHECK_RESULT
 runlevel >>$CHECK_RESULT
 
-# Check Filesystem 
+# Check Filesystem
 echo -e "\n==== Filesystem ====\n" >>$CHECK_RESULT
 df -Th >>$CHECK_RESULT
 
 echo -e "\n==== Filesystem inode ====\n" >>$CHECK_RESULT
 df -ih >>$CHECK_RESULT
 
-# Check Memory 
+# Check Memory
 echo -e "\n==== Memory ====\n" >>$CHECK_RESULT
 free -m >>$CHECK_RESULT
 
@@ -293,7 +293,7 @@ cat /etc/SuSE-release >>$CHECK_RESULT
 echo -e "\n==== IP addresses ====\n" >>$CHECK_RESULT
 #ip a >>$CHECK_RESULT
 
-# Check OS uptime 
+# Check OS uptime
 echo -e "\n==== Uptime ====\n" >>$CHECK_RESULT
 uptime >>$CHECK_RESULT
 
@@ -349,14 +349,14 @@ rpm -qa | wc -l >>$CHECK_RESULT
 echo -e "\n==== RPM counts ====\n" >>$CHECK_RESULT
 systemctl get-default >>$CHECK_RESULT
 
-# Check Filesystem 
+# Check Filesystem
 echo -e "\n==== Filesystem ====\n" >>$CHECK_RESULT
 df -Th >>$CHECK_RESULT
 
 echo -e "\n==== Filesystem inode ====\n" >>$CHECK_RESULT
 df -ih >>$CHECK_RESULT
 
-# Check Memory 
+# Check Memory
 echo -e "\n==== Memory ====\n" >>$CHECK_RESULT
 free -m >>$CHECK_RESULT
 
@@ -506,7 +506,7 @@ cat /etc/redhat-release >>$CHECK_RESULT
 echo -e "\n==== IP addresses ====\n" >>$CHECK_RESULT
 #ip a >>$CHECK_RESULT
 
-# Check OS uptime 
+# Check OS uptime
 echo -e "\n==== Uptime ====\n" >>$CHECK_RESULT
 uptime >>$CHECK_RESULT
 
@@ -562,14 +562,14 @@ rpm -qa | wc -l >>$CHECK_RESULT
 echo -e "\n==== RPM counts ====\n" >>$CHECK_RESULT
 systemctl get-default >>$CHECK_RESULT
 
-# Check Filesystem 
+# Check Filesystem
 echo -e "\n==== Filesystem ====\n" >>$CHECK_RESULT
 df -Th >>$CHECK_RESULT
 
 echo -e "\n==== Filesystem inode ====\n" >>$CHECK_RESULT
 df -ih >>$CHECK_RESULT
 
-# Check Memory 
+# Check Memory
 echo -e "\n==== Memory ====\n" >>$CHECK_RESULT
 free -m >>$CHECK_RESULT
 
