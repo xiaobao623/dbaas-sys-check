@@ -118,10 +118,9 @@ upel_system_check_report_csv() {
     printf "%-30s %-40s\n" "Filesystem Used than 80%;" "`df -Th | egrep -v "tmpfs|iso" | sed -n '2,$'p | awk 'NF==1{t=$1;getline;$1=t " " $1}1' | gawk '{if ($6>=80) print}' | tr "\n" " "`"
 }
 
-test -f /etc/SuSE-release
-if [ $? -eq 0 ];then
-    SUSEVERSION="`grep VERSION /etc/SuSE-release | awk '{print $3}'`"
-    SUSEPATCHLEVEL="`grep PATCHLEVEL /etc/SuSE-release | awk '{print $3}'`"
+if [[ -f /etc/SuSE-release ]];then
+    SUSEVERSION="$( grep VERSION /etc/SuSE-release | awk '{print $3}' )"
+    SUSEPATCHLEVEL="$( grep PATCHLEVEL /etc/SuSE-release | awk '{print $3}' )"
 
     if [ $SUSEVERSION == 12 ];then
         echo -e "Beginning SUSE 12 System Check...\n"

@@ -200,8 +200,6 @@ tail -n${LINES} /var/log/messages >>$CHECK_RESULT
 # Check finished
 echo -e "\n==== OS Check finished ====\n" >>$CHECK_RESULT
 
-cd $REPORT_DIR/ && tar zcf `hostname`-$REPORT_TYPE-$DATE.tgz $REPORT_TYPE/
-
 echo -e "System check report file:
     $REPORT_DIR/`hostname`-$REPORT_TYPE-$DATE.tgz
 Please download and send this file to BSG support team."
@@ -411,8 +409,6 @@ tail -n${LINES} /var/log/messages >>$CHECK_RESULT
 
 # Check finished
 echo -e "\n==== OS Check finished ====\n" >>$CHECK_RESULT
-
-cd $REPORT_DIR/ && tar zcf `hostname`-$REPORT_TYPE-$DATE.tgz $REPORT_TYPE/
 
 echo -e "System check report file:
     $REPORT_DIR/`hostname`-$REPORT_TYPE-$DATE.tgz
@@ -629,8 +625,6 @@ journalctl -n${LINES} >>$CHECK_RESULT
 # Check finished
 echo -e "\n==== OS Check finished ====\n" >>$CHECK_RESULT
 
-cd $REPORT_DIR/ && tar zcf `hostname`-$REPORT_TYPE-$DATE.tgz $REPORT_TYPE/
-
 echo -e "System check report file:
     $REPORT_DIR/`hostname`-$REPORT_TYPE-$DATE.tgz
 Please download and send this file to BSG support team."
@@ -639,7 +633,9 @@ Please download and send this file to BSG support team."
 alias egrep='egrep --color=auto'
 DATE=`date +%Y%m%d`
 REPORT_TYPE="system"
-REPORT_DIR="/tmp/check-reports"
+DIR="$(readlink -f "${0}")"
+BASE_DIR="$(dirname "${DIR}")"
+REPORT_DIR="${BASE_DIR}/check-reports"
 HOSTNAME=`hostname`
 LINES="2000"
 
